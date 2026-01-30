@@ -1,0 +1,562 @@
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #e5e5e5;
+    /* Slightly darker to make header pop like in screenshot preview */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Header Styles */
+.site-header {
+    background-color: #fff;
+    /* Screenshot doesn't show a strong shadow, but a clean separator or none. keeping subtle. */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1300px;
+    /* Slightly tighter than 1400 based on spacing */
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 85px;
+    /* Screenshot looks compact */
+}
+
+/* Logo */
+.logo img {
+    height: 45px;
+    /* Adjusted size */
+    width: auto;
+    display: block;
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+    display: none;
+}
+
+@media (min-width: 1100px) {
+    .desktop-nav {
+        display: block;
+        /* margin-left: auto; */
+        /* margin-right: 40px; */
+        /* More space before actions */
+        height: 100%;
+        /* Ensure desktop-nav takes full height */
+    }
+
+    /* Navigation */
+    .main-navigation {
+        margin-left: auto;
+        margin-right: 40px;
+        /* Adjust spacing to actions */
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-menu {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 36px;
+        /* Exact spacing from spec */
+        height: 100%;
+    }
+
+    .menu-item {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        /* Looks correct */
+        font-weight: 600;
+        /* Bold/Semi-bold */
+        color: #1a1a1a;
+        /* Darker black */
+        /* padding: 10px 0; */
+        cursor: pointer;
+    }
+
+    .nav-menu>li>a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 600;
+        font-size: 14px;
+        /* Reduced from 15px to match tighter look */
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        /* Spacing for arrow */
+        padding: 5px 0;
+        /* Reduce padding to rely on gap */
+        transition: color 0.2s;
+        /* text-transform: uppercase; Looks uppercase in some shots, checking.. actually Title Case in latest shot "Who We Are". Keeping Title Case. */
+    }
+
+    .menu-item:hover>a {
+        color: #00BFB3;
+    }
+
+    .arrow-icon {
+        width: 10px;
+        /* Smaller chevron */
+        height: 10px;
+        fill: currentColor;
+        opacity: 0.8;
+    }
+
+
+    /* Dropdown & Mega Menu Base */
+    .sub-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        /* Align left with parent */
+        background: #fff;
+        min-width: 220px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.2s ease;
+        border-radius: 0 0 4px 4px;
+        /* Square top corners to flush with header */
+        padding: 20px 0;
+        z-index: 1000;
+        border-top: 3px solid #00BFB3;
+        /* Teal top border often used in similar designs */
+    }
+
+    /* Hover State */
+    .menu-item:hover>.sub-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    /* Mega Menu Variations */
+    .sub-menu.mega-menu-3-col {
+        min-width: 600px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        padding: 30px;
+        /* Left align with parent, but ensure it doesn't overflow screen. 
+       Usually "Who We Are" is first, so left:0 is fine. 
+       "IVS" is later, left:0 might be too far right? 
+       The screenshot shows "Sub-menu should be placed align left" relative to the Menu Item. 
+    */
+        left: 0;
+        transform: translateY(10px);
+    }
+
+    .menu-item:hover>.sub-menu.mega-menu-3-col {
+        transform: translateY(0);
+    }
+
+    .sub-menu.mega-menu-2-col {
+        min-width: 450px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        padding: 30px;
+        left: 0;
+        transform: translateY(10px);
+    }
+
+    .menu-item:hover>.sub-menu.mega-menu-2-col {
+        transform: translateY(0);
+    }
+}
+
+/* Column Styling */
+.sub-menu .column {
+    display: flex;
+    flex-direction: column;
+}
+
+.sub-menu .column ul {
+    padding: 0;
+    list-style: none;
+}
+
+/* Links in Dropdown */
+.sub-menu a {
+    display: block;
+    padding: 8px 12px;
+    color: #555;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s;
+    border-radius: 4px;
+}
+
+.sub-menu a:hover {
+    background: #fbfbfb;
+    color: #00BFB3;
+    padding-left: 16px;
+}
+
+/* Menu Headings */
+.menu-heading {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #999;
+    font-weight: 700;
+    padding: 0 12px 8px 12px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+/* Nested Submenu (for What We Do) */
+.has-nested {
+    position: relative;
+}
+
+.arrow-icon-right {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+    margin-left: auto;
+    /* Push to right */
+    opacity: 0.6;
+}
+
+.has-nested>a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nested-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-left: 5px;
+    background: #fff;
+    min-width: 220px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    padding: 10px 0;
+    border: 1px solid #f0f0f0;
+}
+
+.has-nested:hover .nested-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+
+/* Actions */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Hide Desktop Actions by default (Mobile) */
+.search-btn,
+.donate-btn {
+    display: none;
+}
+
+/* Mobile Toggle - Visible by default */
+.mobile-toggle {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    padding: 5px;
+}
+
+@media (min-width: 1100px) {
+
+    /* Show Desktop Actions on larger screens */
+    .search-btn,
+    .donate-btn {
+        display: flex;
+        /* or block/inline-flex as needed */
+    }
+
+    /* Hide Mobile Toggle */
+    .mobile-toggle {
+        display: none;
+    }
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #00BFB3;
+    padding: 5px;
+    transition: transform 0.2s;
+    align-items: center;
+}
+
+.search-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+.donate-btn {
+    background-color: #00BFB3;
+    color: #fff;
+    padding: 10px 28px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: background 0.2s, transform 0.2s;
+    letter-spacing: 0.3px;
+    /* Ensure flex display is respected in media query */
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 99999 !important;
+    /* Maximum z-index */
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s;
+    display: block !important;
+    /* Ensure it exists in DOM */
+}
+
+.mobile-menu-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.mobile-menu-overlay.active .mobile-menu-container {
+    right: 0;
+}
+
+.mobile-menu-container {
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    background: #ffffff !important;
+    /* Force white background */
+    transition: right 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    z-index: 100000;
+    /* Container above overlay */
+}
+
+.mobile-menu {
+    display: flex !important;
+    flex-direction: column !important;
+    /* Force vertical stack */
+    gap: 20px;
+    width: 100%;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+}
+
+.mobile-item {
+    border-bottom: none;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100%;
+    margin: 0 !important;
+}
+
+.mobile-link-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    order: 1 !important;
+    cursor: pointer;
+    padding: 10px 0;
+    /* Add touch target size */
+}
+
+.mobile-sub-menu {
+    order: 2 !important;
+}
+
+.mobile-link-wrapper a {
+    font-weight: 700;
+    font-size: 16px;
+    color: #222 !important;
+    /* Force color against theme overrides */
+    display: block;
+}
+
+.submenu-toggle {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    /* Remove focus ring */
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+    -webkit-tap-highlight-color: transparent;
+    /* Remove mobile tap box */
+}
+
+.submenu-toggle svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: #555;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    display: block;
+}
+
+/* Accordion Logic - Simplified for Reliability */
+.mobile-sub-menu {
+    display: none;
+    /* Hidden by default */
+    padding-left: 0;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.mobile-item.open .mobile-sub-menu {
+    display: block !important;
+    /* Force visible when open */
+    margin-bottom: 10px;
+}
+
+.mobile-item.open .submenu-toggle {
+    transform: rotate(180deg);
+}
+
+.mobile-item.open>.mobile-link-wrapper a {
+    color: #333 !important;
+}
+
+/* Screenshot shows sub-items are teal */
+.mobile-sub-menu li a {
+    display: block;
+    padding: 10px 0;
+    color: #00BFB3 !important;
+    /* Force teal */
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.mobile-actions {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    padding-top: 20px;
+    /* border-top: 1px solid #f0f0f0; Remove border if not in screenshot */
+}
+
+.mobile-actions .donate-btn {
+    display: block !important;
+    /* Override global mobile hide */
+    width: auto;
+    /* Button size */
+    min-width: 140px;
+    text-align: center;
+    padding: 12px 30px;
+    background-color: #00BFB3;
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.search-btn-mobile {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #00BFB3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.search-btn-mobile svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Menu Heading Style */
+.menu-heading {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #999;
+    font-weight: 700;
+    padding: 0 12px 8px 12px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+/* Column handling for mega menus */
+.sub-menu .column {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-heading {
+    color: #1a1a1a !important;
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-transform: none;
+}
+
+.mega-menu-2-col {
+    grid-template-columns: 1.5fr 1fr;
+}
+
+/* Adjust column ratio for Who We Are */

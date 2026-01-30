@@ -1,0 +1,267 @@
+<?php
+/**
+ * Plugin Name: CCIVS Custom Header
+ * Description: Adds a custom responsive header via [ccivs_header] shortcode.
+ * Version: 1.0
+ * Author: VS AI
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
+function ccivs_enqueue_header_assets() {
+    wp_register_style( 'ccivs-header-style', plugins_url( 'assets/css/header.css', __FILE__ ) );
+    wp_register_script( 'ccivs-header-script', plugins_url( 'assets/js/header.js', __FILE__ ), array(), '1.0', true );
+}
+add_action( 'wp_enqueue_scripts', 'ccivs_enqueue_header_assets' );
+
+function ccivs_header_shortcode() {
+    // Enqueue assets only when shortcode is used
+    wp_enqueue_style( 'ccivs-header-style' );
+    wp_enqueue_script( 'ccivs-header-script' );
+
+    ob_start();
+    ?>
+    <header class="site-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="<?php echo esc_url( home_url() ); ?>">
+                    <img src="<?php echo esc_url( plugins_url( 'assets/images/ccivs-logo.png', __FILE__ ) ); ?>" alt="CCIVS" style="height: 70px; width: auto;">
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul class="nav-menu">
+                    <!-- Who We Are: Mega Menu (2 Columns) -->
+                    <li class="menu-item has-children has-mega">
+                        <a href="#">Who We Are <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></a>
+                        <div class="sub-menu mega-menu-2-col" style="min-width: 400px; padding: 30px;">
+                            <div class="column">
+                                <span class="menu-heading" style="color: #333; border: none; padding-left: 12px; margin-bottom: 10px;">CCIVS</span>
+                                <ul>
+                                    <li><a href="#">Aims & Objectives</a></li>
+                                    <li><a href="#">Mission, Vision, Values</a></li>
+                                    <li><a href="#">The Strategy Plan</a></li>
+                                    <li><a href="#">The CCIVS team</a></li>
+                                    <li><a href="#">Executive Committee</a></li>
+                                    <li><a href="#">General Assembly</a></li>
+                                    <li><a href="#">Partnerships</a></li>
+                                </ul>
+                            </div>
+                            <div class="column">
+                                <span class="menu-heading" style="color: #333; border: none; padding-left: 12px; margin-bottom: 10px;">The IVS Movement</span>
+                                <ul>
+                                    <li><a href="#">What is IVS</a></li>
+                                    <li><a href="#">Our History</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- What We Do: Mega Menu (2 Columns) -->
+                    <li class="menu-item has-children has-mega">
+                        <a href="#">What We Do <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></a>
+                        <div class="sub-menu mega-menu-2-col" style="min-width: 400px; padding: 30px;">
+                            <div class="column">
+                                <span class="menu-heading" style="color: #333; border: none; padding-left: 12px; margin-bottom: 10px;">CCIVS in Action</span>
+                                <ul>
+                                    <li><a href="#">CCIVS Initiatives</a></li>
+                                    <li><a href="#">Advocacy</a></li>
+                                    <li><a href="#">Impact</a></li>
+                                    <li><a href="#">Sustainable Development Goals</a></li>
+                                </ul>
+                            </div>
+                            <div class="column">
+                                <span class="menu-heading" style="color: #333; border: none; padding-left: 12px; margin-bottom: 10px;">Projects</span>
+                                <ul>
+                                    <li><a href="#">Current Projects</a></li>
+                                    <li><a href="#">Former Projects</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- IVS in the World: Mega Menu (3 Columns) -->
+                    <li class="menu-item has-children has-mega">
+                        <a href="#">IVS in the World <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></a>
+                        <div class="sub-menu mega-menu-3-col" style="min-width: 600px; padding: 30px;">
+                            <div class="column">
+                                <span class="menu-heading" style="color: #333; border: none; padding-left: 12px; margin-bottom: 10px;">CCIVS Membership</span>
+                                <ul>
+                                    <li><a href="#">Members & Affiliated Organisations</a></li>
+                                    <li><a href="#">Become a Member</a></li>
+                                    <li><a href="#">Become a Supporter</a></li>
+                                    <li><a href="#">International Solidarity Fund</a></li>
+                                </ul>
+                            </div>
+                            <div class="column">
+                                <span class="menu-heading" style="color: #333; border: none; padding-left: 12px; margin-bottom: 10px;">Volunteer</span>
+                                <ul>
+                                    <li><a href="#">Become a Volunteer</a></li>
+                                </ul>
+                            </div>
+                            <div class="column">
+                                <span class="menu-heading" style="color: #333; border: none; padding-left: 12px; margin-bottom: 10px;">IVS Networks in the World</span>
+                                <ul>
+                                    <li><a href="#">Global Meetings of IVS Organisations</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Resources & Service: Mega Menu (2 Columns) -->
+                    <li class="menu-item has-children has-mega">
+                        <a href="#">Resources & Service <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></a>
+                        <div class="sub-menu mega-menu-2-col" style="min-width: 450px; padding: 30px;">
+                            <div class="column">
+                                <span class="menu-heading" style="color: #333; border: none; padding-left: 12px; margin-bottom: 10px;">Resources</span>
+                                <ul>
+                                    <li><a href="#">Toolbox</a></li>
+                                    <li><a href="#">iLearn</a></li>
+                                    <li><a href="#">Research</a></li>
+                                </ul>
+                            </div>
+                            <div class="column">
+                                <span class="menu-heading" style="color: #333; border: none; padding-left: 12px; margin-bottom: 10px;">Services</span>
+                                <ul>
+                                    <li><a href="#">Partnerships & Sponsoring</a></li>
+                                    <li><a href="#">Training & Consultancy</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="menu-item"><a href="#">Contact</a></li>
+                    <li class="menu-item"><a href="#">News</a></li>
+                </ul>
+            </nav>
+
+            <!-- Right Actions -->
+            <div class="header-actions">
+                <button class="search-btn" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <a href="#" class="donate-btn">Donate</a>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-toggle" aria-label="Open Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay">
+        <div class="mobile-menu-container">
+            <div class="mobile-header">
+                <div class="logo">
+                    <img src="<?php echo esc_url( plugins_url( 'assets/images/ccivs-logo.png', __FILE__ ) ); ?>" alt="CCIVS" style="height: 50px; width: auto;">
+                </div>
+                <button class="mobile-close" aria-label="Close Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mobile-scroll-content">
+                <nav class="mobile-nav">
+                    <ul class="mobile-menu">
+                        <li class="mobile-item has-children">
+                            <div class="mobile-link-wrapper">
+                                <a href="#">Who We Are</a>
+                                <button class="submenu-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                            </div>
+                            <ul class="mobile-sub-menu">
+                                <li><a href="#">Aims & Objectives</a></li>
+                                <li><a href="#">Mission, Vision, Values</a></li>
+                                <li><a href="#">The Strategy Plan</a></li>
+                                <li><a href="#">The CCIVS team</a></li>
+                                <li><a href="#">Executive Committee</a></li>
+                                <li><a href="#">General Assembly</a></li>
+                                <li><a href="#">Partnerships</a></li>
+                                <!-- The IVS Movement Section -->
+                                <li><a href="#">What is IVS</a></li>
+                                <li><a href="#">Our History</a></li>
+                            </ul>
+                        </li>
+                        <li class="mobile-item has-children">
+                            <div class="mobile-link-wrapper">
+                                <a href="#">What We Do</a>
+                                <button class="submenu-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                            </div>
+                            <ul class="mobile-sub-menu">
+                                <!-- CCIVS in Action -->
+                                <li><a href="#">CCIVS Initiatives</a></li>
+                                <li><a href="#">Advocacy</a></li>
+                                <li><a href="#">Impact</a></li>
+                                <li><a href="#">Sustainable Development Goals</a></li>
+                                <!-- Projects -->
+                                <li><a href="#">Current Projects</a></li>
+                                <li><a href="#">Former Projects</a></li>
+                            </ul>
+                        </li>
+                        <li class="mobile-item has-children">
+                            <div class="mobile-link-wrapper">
+                                <a href="#">IVS in the World</a>
+                                <button class="submenu-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                            </div>
+                            <ul class="mobile-sub-menu">
+                                <!-- Membership -->
+                                <li><a href="#">Members & Affiliated Organisations</a></li>
+                                <li><a href="#">Become a Member</a></li>
+                                <li><a href="#">Become a Supporter</a></li>
+                                <li><a href="#">International Solidarity Fund</a></li>
+                                <!-- Volunteer -->
+                                <li><a href="#">Become a Volunteer</a></li>
+                                <!-- Networks -->
+                                <li><a href="#">Global Meetings of IVS Organisations</a></li>
+                            </ul>
+                        </li>
+                        <li class="mobile-item has-children">
+                            <div class="mobile-link-wrapper">
+                                <a href="#">Resources & Service</a>
+                                <button class="submenu-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                            </div>
+                            <ul class="mobile-sub-menu">
+                                <!-- Resources -->
+                                <li><a href="#">Toolbox</a></li>
+                                <li><a href="#">iLearn</a></li>
+                                <li><a href="#">Research</a></li>
+                                <!-- Services -->
+                                <li><a href="#">Partnerships & Sponsoring</a></li>
+                                <li><a href="#">Training & Consultancy</a></li>
+                            </ul>
+                        </li>
+                        <li class="mobile-item"><a href="#">Contact</a></li>
+                        <li class="mobile-item"><a href="#">News</a></li>
+                    </ul>
+                </nav>
+
+                <div class="mobile-actions">
+                    <a href="#" class="donate-btn">Donate</a>
+                    <button class="search-btn-mobile">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'ccivs_header', 'ccivs_header_shortcode' );
