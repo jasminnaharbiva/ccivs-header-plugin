@@ -11,8 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function ccivs_enqueue_header_assets() {
-    wp_register_style( 'ccivs-header-style', plugins_url( 'assets/css/header.css', __FILE__ ) );
-    wp_register_script( 'ccivs-header-script', plugins_url( 'assets/js/header.js', __FILE__ ), array(), '1.0', true );
+    // USE time() TO FORCE CACHE BUSTING
+    wp_register_style( 'ccivs-header-style', plugins_url( 'assets/css/header.css', __FILE__ ), array(), time() );
+    wp_register_script( 'ccivs-header-script', plugins_url( 'assets/js/header.js', __FILE__ ), array(), time(), true );
 }
 add_action( 'wp_enqueue_scripts', 'ccivs_enqueue_header_assets' );
 
@@ -162,12 +163,12 @@ function ccivs_header_shortcode() {
 
     <!-- Mobile Menu Overlay -->
     <div class="mobile-menu-overlay">
-        <div class="mobile-menu-container">
+        <div id="ccivs-mobile-drawer" class="mobile-menu-container">
             <div class="mobile-header">
                 <div class="logo">
                     <img src="<?php echo esc_url( plugins_url( 'assets/images/ccivs-logo.png', __FILE__ ) ); ?>" alt="CCIVS" style="height: 50px; width: auto;">
                 </div>
-                <button class="mobile-close" aria-label="Close Menu">
+                <button id="ccivs-mobile-close" class="mobile-close" aria-label="Close Menu">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
