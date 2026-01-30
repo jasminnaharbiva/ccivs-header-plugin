@@ -74,4 +74,15 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    // Close mobile menu on resize if screen becomes large
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 991) {
+            if (mobileOverlay && mobileOverlay.classList.contains('active')) {
+                console.log('Window resized to desktop, closing mobile menu');
+                mobileOverlay.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            }
+        }
+    });
 });
