@@ -443,17 +443,28 @@ ul {
     margin: 0 !important;
 }
 
+.mobile-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 20px 25px !important;
+    /* increased top/bottom padding for better alignment */
+    border-bottom: 1px solid #eee !important;
+    height: 80px !important;
+    /* Force height to match desktop header approx */
+}
+
 .mobile-link-wrapper {
     display: flex;
     justify-content: flex-start;
-    gap: 8px;
-    /* Tighter gap */
+    gap: 12px;
+    /* Standardize gap */
     align-items: center;
     width: 100%;
     order: 1 !important;
     cursor: pointer;
-    padding: 12px 0;
-    /* Consistent padding */
+    padding: 8px 0 !important;
+    /* Reduced padding for tighter menu */
     line-height: 1.2;
 }
 
