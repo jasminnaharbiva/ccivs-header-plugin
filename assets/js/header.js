@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('Header script loaded');
-    
+
     const mobileToggle = document.querySelector('.mobile-toggle');
     const mobileClose = document.querySelector('.mobile-close');
     const mobileOverlay = document.querySelector('.mobile-menu-overlay');
@@ -21,16 +21,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (mobileToggle) {
-        mobileToggle.addEventListener('click', function(e) {
+        mobileToggle.addEventListener('click', function (e) {
             console.log('Mobile toggle clicked');
             e.preventDefault();
             e.stopPropagation();
             toggleMenu();
         });
     }
-    
+
     if (mobileClose) {
-        mobileClose.addEventListener('click', function(e) {
+        mobileClose.addEventListener('click', function (e) {
             console.log('Mobile close clicked');
             e.preventDefault();
             e.stopPropagation();
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close menu when clicking overlay background
     if (mobileOverlay) {
-        mobileOverlay.addEventListener('click', function(e) {
+        mobileOverlay.addEventListener('click', function (e) {
             if (e.target === mobileOverlay) {
                 console.log('Overlay background clicked');
                 toggleMenu();
@@ -51,14 +51,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle submenu toggles
     const submenuToggles = document.querySelectorAll('.submenu-toggle');
     console.log('Submenu toggles found:', submenuToggles.length);
-    
-    submenuToggles.forEach(function(toggle, index) {
-        toggle.addEventListener('click', function(e) {
+
+    submenuToggles.forEach(function (toggle, index) {
+        toggle.addEventListener('click', function (e) {
             console.log('Submenu toggle clicked:', index);
             e.preventDefault();
             e.stopPropagation();
             const parent = this.closest('.mobile-item');
+
             if (parent) {
+                // ACCORDION LOGIC: Close all other open menus
+                const allMobileItems = document.querySelectorAll('.mobile-item.has-children');
+                allMobileItems.forEach(function (item) {
+                    if (item !== parent && item.classList.contains('open')) {
+                        item.classList.remove('open');
+                    }
+                });
+
+                // Toggle current menu
                 parent.classList.toggle('open');
                 console.log('Submenu toggled. Open:', parent.classList.contains('open'));
             }
