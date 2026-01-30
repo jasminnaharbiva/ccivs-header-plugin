@@ -48,30 +48,41 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Handle submenu toggles
-    const submenuToggles = document.querySelectorAll('.submenu-toggle');
-    console.log('Submenu toggles found:', submenuToggles.length);
+    // Helper to toggle menu item
+    function toggleMenuItem(element) {
+        const parent = element.closest('.mobile-item');
+        if (parent) {
+            // ACCORDION LOGIC: Close all other open menus
+            const allMobileItems = document.querySelectorAll('.mobile-item.has-children');
+            allMobileItems.forEach(function (item) {
+                if (item !== parent && item.classList.contains('open')) {
+                    item.classList.remove('open');
+                }
+            });
+            // Toggle current
+            parent.classList.toggle('open');
+            console.log('Submenu toggled via ' + element.tagName);
+        }
+    }
 
-    submenuToggles.forEach(function (toggle, index) {
+    // Handle submenu toggles (Arrow Buttons)
+    const submenuToggles = document.querySelectorAll('.submenu-toggle');
+    submenuToggles.forEach(function (toggle) {
         toggle.addEventListener('click', function (e) {
-            console.log('Submenu toggle clicked:', index);
             e.preventDefault();
             e.stopPropagation();
-            const parent = this.closest('.mobile-item');
+            toggleMenuItem(this);
+        });
+    });
 
-            if (parent) {
-                // ACCORDION LOGIC: Close all other open menus
-                const allMobileItems = document.querySelectorAll('.mobile-item.has-children');
-                allMobileItems.forEach(function (item) {
-                    if (item !== parent && item.classList.contains('open')) {
-                        item.classList.remove('open');
-                    }
-                });
-
-                // Toggle current menu
-                parent.classList.toggle('open');
-                console.log('Submenu toggled. Open:', parent.classList.contains('open'));
-            }
+    // Handle submenu toggles (Text Links)
+    // Select the A tag inside the wrapper of items that have children
+    const textLinks = document.querySelectorAll('.mobile-item.has-children .mobile-link-wrapper > a');
+    textLinks.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent jump/nav
+            e.stopPropagation();
+            toggleMenuItem(this);
         });
     });
 
