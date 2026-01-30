@@ -454,7 +454,8 @@ ul {
     /* Force height to match desktop header approx */
 }
 
-.mobile-link-wrapper {
+.mobile-link-wrapper,
+.mobile-item>a {
     display: flex;
     justify-content: flex-start;
     gap: 12px;
@@ -466,6 +467,8 @@ ul {
     padding: 8px 0 !important;
     /* Reduced padding for tighter menu */
     line-height: 1.2;
+    text-decoration: none !important;
+    color: #222 !important;
 }
 
 .mobile-sub-menu {
